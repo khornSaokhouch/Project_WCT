@@ -4,7 +4,7 @@ import ProfileUser from "../../components/Profile";
 import Footer from "../../components/Footer";
 import WhyChooseUs from "./components/WhyChooseUs";
 import FeatureNewsCard from "./components/card/FeatureNewsCard";
-import Services from "@/app/ServiceS/components/Service";
+import Services from "@/components/home/Card/Service";
 
 export default function ServicesPage() {
   return (

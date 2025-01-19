@@ -5,8 +5,7 @@ import { useState, useEffect } from "react";
 import ProfileUser from "../../../components/Profile";
 import { useParams } from "next/navigation";
 import { useAuthStore } from "../../../store/authStore";
-// import Service from "../services/components/Service";
-import Services from "@/app/ServiceS/components/Service";
+import Services from "../../../components/home/Card/Service";
 
 import TopCard from "@/components/home/Card/TopCard";
 import TrendingCard from "@/components/home/Card/TrendingCard";

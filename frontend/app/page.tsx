@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Footer from "../components/Footer";
 import ProfileUser from "../components/Profile";
-import Service from "./ServiceS/components/Service";
+import Service from "../components/home/Card/Service";
 import TopCard from "../components/home/Card/TopCard";
 import PopularCard from "../components/home/Card/PopularCard";
 import WeekendCard from "../components/home/Card/WeekendCard";
@@ -29,9 +29,7 @@ export default function Home() {
 
   useEffect(() => {
     if (user?._id) {
-      fetchImage(user._id).catch(() =>
-        console.error("Error in fetchImage:")
-      );
+      fetchImage(user._id).catch(() => console.error("Error in fetchImage:"));
     }
   }, [user, fetchImage]);
 
