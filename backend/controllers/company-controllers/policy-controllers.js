@@ -3,7 +3,7 @@ import { User } from "../../model/user.js"; // Import the User model for created
 
 // Create a new policy
 export const createPolicy = async (req, res) => {
-  const { title, description, effectiveDate } = req.body;
+  const { title, description } = req.body;
   const subAdminId = req.params.id; // Sub-admin ID from the URL parameter
 
   try {
@@ -17,7 +17,7 @@ export const createPolicy = async (req, res) => {
     }
 
     // Validate required fields
-    if (!title || !description || !effectiveDate) {
+    if (!title || !description) {
       return res.status(400).json({
         success: false,
         message:
@@ -29,7 +29,6 @@ export const createPolicy = async (req, res) => {
     const policy = new Policy({
       title,
       description,
-      effectiveDate,
       createdBy: subAdminId,
     });
 
@@ -130,7 +129,7 @@ export const getPolicyById = async (req, res) => {
 // Update a policy by ID
 export const updatePolicy = async (req, res) => {
   const { subadminId, id } = req.params; // Sub-admin ID and policy ID from the URL
-  const { title, description, effectiveDate, isActive } = req.body;
+  const { title, description, isActive } = req.body;
 
   try {
     // Check if the sub-admin exists
@@ -154,7 +153,6 @@ export const updatePolicy = async (req, res) => {
     // Update the policy fields
     if (title) policy.title = title;
     if (description) policy.description = description;
-    if (effectiveDate) policy.effectiveDate = effectiveDate;
     if (isActive !== undefined) policy.isActive = isActive;
 
     await policy.save();
