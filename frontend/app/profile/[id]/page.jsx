@@ -12,7 +12,6 @@ import PopularCard from "@/components/home/Card/PopularCard";
 import WeekendCard from "@/components/home/Card/WeekendCard";
 import TraditionalCard from "@/components/home/Card/TraditionalCard";
 import Footer from "../../../components/Footer";
-import Services from "@/components/home/Card/Service";
 
 const ProfilePage = () => {
   const { id } = useParams();
@@ -48,7 +47,6 @@ const ProfilePage = () => {
       <PopularCard />
       <WeekendCard />
       <TraditionalCard />
-      <Services />
       <Footer />
     </div>
   );
