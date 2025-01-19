@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Footer from "../components/Footer";
 import ProfileUser from "../components/Profile";
-import Service from "../components/home/Card/Service";
+import Services from "@/components/home/Card/Service";
 import TopCard from "../components/home/Card/TopCard";
 import PopularCard from "../components/home/Card/PopularCard";
 import WeekendCard from "../components/home/Card/WeekendCard";
@@ -49,7 +49,7 @@ export default function Home() {
       <PopularCard />
       <WeekendCard />
       <TraditionalCard /> {/* Fixed typo */}
-      <Service />
+      <Services />
       <Footer />
     </div>
   );
