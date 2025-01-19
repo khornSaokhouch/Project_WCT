@@ -16,13 +16,16 @@ export default function Home() {
   const { id } = useParams();
   const { user, isLoading, error, fetchImage, fetchUserById } = useAuthStore();
 
+  // Ensure `id` is a string
+  const userId = Array.isArray(id) ? id[0] : id || "";
+
   useEffect(() => {
-    if (id) {
-      fetchUserById(id).catch(() =>
+    if (userId) {
+      fetchUserById(userId).catch(() =>
         console.error("Error in fetchUserById:")
       );
     }
-  }, [id, fetchUserById]);
+  }, [userId, fetchUserById]);
 
   useEffect(() => {
     if (user?._id) {
@@ -42,7 +45,7 @@ export default function Home() {
 
   return (
     <div>
-      <ProfileUser id={id} />
+      <ProfileUser id={userId} />
       <TopCard />
       <TrendingCard />
       <PopularCard />

@@ -370,5 +370,25 @@
       "duration": "2 days / 3 nights - Family",
       "reviews": "4.5 (1,272 reviews)"
     }
-  ]
+  ],
+    "services": [
+      {
+        "icon": "📚",
+        "title": "Local Culture",
+        "description": "Built Wicket longer admire do barton vanity itself do it.",
+        "link": "/services/local-culture"
+      },
+      {
+        "icon": "✈️",
+        "title": "Local Historical Sites",
+        "description": "Engrossed listening, Park gate sell they west hard for the.",
+        "link": "/services/historical-sites"
+      },
+      {
+        "icon": "🎤",
+        "title": "Local Events",
+        "description": "Barton vanity itself do it. Preferred to men it engrossed listening.",
+        "link": "/services/local-events"
+      }
+    ]
 }

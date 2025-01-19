@@ -1,10 +1,6 @@
 "use client";
 import React, { useState } from "react";
-<<<<<<< Updated upstream
 import { useAuthStore } from "@/store/authStore";
-=======
-import { useAuthStore } from "../../../../store/authStore";
->>>>>>> Stashed changes
 
 const ImageUploader = () => {
   const [file, setFile] = useState(null);

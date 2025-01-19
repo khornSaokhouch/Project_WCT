@@ -2,10 +2,10 @@
   "name": "project-app-booking",
   "version": "1.0.0",
   "description": "A booking application backend built with Node.js and Express",
-  "main": "backend/index.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon backend/index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "booking",

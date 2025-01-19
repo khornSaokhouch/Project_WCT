@@ -2,15 +2,15 @@
 
 import ProfileUser from "../../components/Profile";
 import Footer from "../../components/Footer";
-import Service from "@/components/Service";
 import WhyChooseUs from "./components/WhyChooseUs";
 import FeatureNewsCard from "./components/card/FeatureNewsCard";
+import Services from "@/app/ServiceS/components/Service";
 
 export default function ServicesPage() {
   return (
     <div>
       <ProfileUser />
-      <Service />
+      <Services />
       <FeatureNewsCard />
       <WhyChooseUs />
       <Footer />

@@ -33,7 +33,7 @@ app.use("/api/tours", tourRoutes);
 app.use("/api/admins", adminRouter);
 app.use("/api/policies", policiesRouter);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3500 ;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
