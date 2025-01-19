@@ -48,7 +48,6 @@ const GuestTable = () => {
           <tr className="w-full bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
             <th className="py-3 px-6 text-left">Guest Name</th>
             <th className="py-3 px-6 text-left">Package Name</th>
-            <th className="py-3 px-6 text-left">Room Type</th>
             <th className="py-3 px-6 text-left">Members</th>
             <th className="py-3 px-6 text-left">Date Order</th>
             <th className="py-3 px-6 text-left">Time</th>
@@ -61,7 +60,6 @@ const GuestTable = () => {
             <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
               <td className="py-3 px-6 font-bold text-left">{guest.name}</td>
               <td className="py-3 px-6 text-left">{guest.package}</td>
-              <td className="py-3 px-6 text-left">{guest.roomType}</td>
               <td className="py-3 px-6 text-left">{guest.members}</td>
               <td className="py-3 px-6 text-left">{guest.date}</td>
               <td className="py-3 px-6 text-left">{guest.time}</td>

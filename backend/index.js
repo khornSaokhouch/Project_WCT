@@ -11,6 +11,7 @@ import categoryRoutes from "./routes/category-route.js";
 import tourRoutes from "./routes/company-routes/addpackage-route.js";
 import adminRouter from "./routes/admin-route.js";
 import policiesRouter from "./routes/company-routes/routes-routes.js";
+import bookingRoutes from "./routes/company-routes/booking-routes.js";
 
 dotenv.config();
 
@@ -32,8 +33,9 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/tours", tourRoutes);
 app.use("/api/admins", adminRouter);
 app.use("/api/policies", policiesRouter);
+app.use("/api/bookings", bookingRoutes);
 
-const PORT = process.env.PORT || 3500 ;
+const PORT = process.env.PORT || 3500;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

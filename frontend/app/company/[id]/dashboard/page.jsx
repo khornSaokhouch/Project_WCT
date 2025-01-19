@@ -5,11 +5,22 @@ import { useAuthStore } from "../../../../store/authStore";
 import { useEffect } from "react";
 import { Users } from "lucide-react"; // Import the Users icon
 import { Card } from "@/components/ui/card"; // Import the Card component
+import { useBookingStore } from "../../../../store/bookingStore";
 
 const DashboardPage = () => {
   const { id } = useParams(); // Get the company ID from the URL
   const { user, image, isLoading, error, fetchImage, fetchCompanyById } =
     useAuthStore(); // Destructure Zustand store
+  const {
+    totalBookings,
+    totalPendingBookings,
+    loading,
+    fetchBookingStatistics,
+  } = useBookingStore();
+
+  useEffect(() => {
+    fetchBookingStatistics();
+  }, [fetchBookingStatistics]); // Destructure Zustand store
 
   // Mock counts data (replace with actual data from your API)
   const counts = {
@@ -55,9 +66,13 @@ const DashboardPage = () => {
       {/* Stats Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
         {[
-          { count: counts.users, label: "Total Booking", color: "text-blue-600" },
           {
-            count: counts.subAdmins,
+            count: totalPendingBookings,
+            label: "Total Booking",
+            color: "text-blue-600",
+          },
+          {
+            count: totalBookings,
             label: " Total pandding",
             color: "text-green-600",
           },
