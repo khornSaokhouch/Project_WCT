@@ -4,7 +4,7 @@ const policySchema = new mongoose.Schema(
   {
     title: { type: String, required: true }, // e.g., "Privacy Policy", "Cancellation Policy"
     description: { type: String, required: true }, // Detailed content of the policy
-    effectiveDate: { type: Date, required: true }, // When the policy comes into effect
+   // When the policy comes into effect
     createdBy: { type: mongoose.Types.ObjectId, ref: "User", required: true }, // Admin/Sub-admin who created it
     isActive: { type: Boolean, default: true }, // To manage active/inactive policies
   },
