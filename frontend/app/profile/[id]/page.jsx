@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import ProfileUser from "../../../components/Profile";
 import { useParams } from "next/navigation";
 import { useAuthStore } from "../../../store/authStore";
-import Services from "@/components/home/Card/Service";
 
 import TopCard from "@/components/home/Card/TopCard";
 import TrendingCard from "@/components/home/Card/TrendingCard";
@@ -13,6 +12,7 @@ import PopularCard from "@/components/home/Card/PopularCard";
 import WeekendCard from "@/components/home/Card/WeekendCard";
 import TraditionalCard from "@/components/home/Card/TraditionalCard";
 import Footer from "../../../components/Footer";
+import Services from "@/components/home/Card/Service";
 
 const ProfilePage = () => {
   const { id } = useParams();
