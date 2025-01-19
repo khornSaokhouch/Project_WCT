@@ -2,11 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useRouter } from 'next/navigation'; // Import the router for navigation
 
 const Historical = () => {
     const [attractions, setAttractions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const router = useRouter(); // Initialize the router
 
     // Fetch data from API
     useEffect(() => {
@@ -28,6 +30,12 @@ const Historical = () => {
         fetchData();
     }, []);
 
+    // Function to handle card click
+    const handleCardClick = (id) => {
+        // Navigate to the detailed page for the clicked attraction
+        router.push(`/historical/${id}`);
+    };
+
     if (loading) {
         return <div className="text-center py-5">Loading...</div>;
     }
@@ -42,10 +50,11 @@ const Historical = () => {
                 We Offer the Best Popular Historical & Cultural Places
             </h1>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                {attractions.map((attraction, index) => (
+                {attractions.map((attraction) => (
                     <div
-                        key={index}
-                        className="border rounded-lg shadow-lg overflow-hidden relative transition-transform transform hover:scale-105 hover:shadow-xl"
+                        key={attraction.id} // Use the attraction's ID as the key
+                        className="border rounded-lg shadow-lg overflow-hidden relative transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer"
+                        onClick={() => handleCardClick(attraction.id)} // Handle click event
                     >
                         <img
                             src={attraction.image}

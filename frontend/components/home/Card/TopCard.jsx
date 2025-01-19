@@ -59,14 +59,16 @@ const TopCard = () => {
                     ({card.reviews} reviews)
                   </span>
                 </div>
-                <h3 className="text-lg font-semibold mt-2">{card.destination}</h3>
+                <h3 className="text-lg font-semibold mt-2">
+                  {card.destination}
+                </h3>
                 <p className="text-gray-600 mt-1">{card.duration}</p>
                 <div className="flex items-center justify-between mt-4">
                   <span className="text-xl font-bold">
                     ${card.price}{" "}
                     <span className="text-gray-500 text-sm">/ person</span>
                   </span>
-                  <button className="bg-blue-500 text-white text-xs px-4 py-2 rounded-full shadow hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+                  <button className="bg-blue-500 text-white text-xs px-4 py-2 rounded-full shadow hover:bg-blue-700 transition-transform duration-300 transform hover:rotate-3 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
                     View Details
                   </button>
                 </div>

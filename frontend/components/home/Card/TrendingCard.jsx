@@ -32,7 +32,7 @@ const TrendingCard = () => {
     return <div className="text-center py-5 text-red-500">Error: {error}</div>;
   }
 
-  return (
+    return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-20 py-8">
       <h2 className="text-center text-3xl font-bold mb-8">
         Trending Destinations
@@ -41,7 +41,7 @@ const TrendingCard = () => {
         {trendingData.map((destination, index) => (
           <div
             key={index}
-            className="relative h-64 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+            className="relative h-64 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 hover:rotate-1"
           >
             <img
               src={destination.image}

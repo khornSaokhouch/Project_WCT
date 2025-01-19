@@ -20,6 +20,8 @@ const ProfileUser = ({ id }) => {
   const { user, fetchUserById } = useAuthStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +41,32 @@ const ProfileUser = ({ id }) => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const performSearch = () => {
+    // Example list of locations (replace with your actual data)
+    const locations = [
+      { name: "Paris", description: "The capital of France" },
+      { name: "New York", description: "The city that never sleeps" },
+      { name: "Tokyo", description: "The capital of Japan" },
+      // Add more locations as needed
+    ];
+
+    const results = locations.filter(location =>
+      location.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    setSearchResults(results);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      performSearch();
+    }
   };
 
   if (error) {
@@ -222,14 +250,30 @@ const ProfileUser = ({ id }) => {
             </div>
             <input
               type="text"
-              placeholder="Search by name of location"
+              placeholder="Search by name of Name of package"
               className="flex-1 px-6 py-4 text-gray-700 text-base focus:outline-none placeholder-gray-400"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              onKeyPress={handleKeyPress}
             />
-            <button className="bg-blue-500 text-white px-8 py-4 text-base font-medium hover:bg-blue-600 transition-all duration-200 ease-in-out">
+            <button
+              className="bg-blue-500 text-white px-8 py-4 text-base font-medium hover:bg-blue-600 transition-all duration-200 ease-in-out"
+              onClick={performSearch}
+            >
               Search
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Display Search Results */}
+      <div className="mt-6">
+        {searchResults.map((location, index) => (
+          <div key={index} className="bg-white p-4 rounded-lg shadow-md mb-4">
+            <h3 className="text-xl font-semibold">{location.name}</h3>
+            <p className="text-gray-600">{location.description}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
