@@ -92,22 +92,34 @@ export const getAllBookings = async (req, res) => {
 };
 
 // Get a single booking by ID
-export const getBookingById = async (req, res) => {
+export const getBookingsBySubadmin = async (req, res) => {
   try {
-    const { id } = req.params;
-    const booking = await Booking.findById(id)
-      .populate("tour", "name price")
-      .populate("user", "name email");
+    const { subadminId } = req.params; // Extract subadmin ID from URL
 
-    if (!booking) {
-      return res.status(404).json({ message: "Booking not found." });
+    // Check if the subadmin exists
+    const subadminExists = await User.findById(subadminId);
+    if (!subadminExists || subadminExists.role !== "subadmin") {
+      return res.status(404).json({ message: "Subadmin not found." });
     }
 
-    res.status(200).json({ booking });
+    // Fetch all bookings approved by the subadmin
+    const bookings = await Booking.find({ approvedBy: subadminId })
+      .populate("tour", "name price") // Populate tour details
+      .populate("user", "name email"); // Populate user details
+
+    if (!bookings || bookings.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No bookings found for this subadmin." });
+    }
+
+    // Send the response with the bookings
+    res.status(200).json({ bookings });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching booking.", error: error.message });
+    res.status(500).json({
+      message: "Error fetching bookings by subadmin.",
+      error: error.message,
+    });
   }
 };
 
@@ -202,7 +214,7 @@ export const getBookingStatisticsByCompanyId = async (req, res) => {
   }
 };
 
- export const getBookingsByApprovedBy = async (req, res) => {
+export const getBookingsByApprovedBy = async (req, res) => {
   try {
     const { approvedBy } = req.query; // Extract the company ID from query params
 
