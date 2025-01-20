@@ -8,7 +8,7 @@ const TrendingCard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3002/trending");
+        const response = await fetch("https://bookingtour-psi.vercel.app/trending");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

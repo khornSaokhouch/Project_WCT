@@ -11,7 +11,7 @@ const Services = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3002/services"); // Replace with your JSON Server endpoint
+        const response = await fetch("https://bookingtour-psi.vercel.app/services"); // Replace with your JSON Server endpoint
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

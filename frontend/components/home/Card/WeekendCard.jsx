@@ -10,7 +10,7 @@ const Weekend = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3002/weekendDeals"); // Updated endpoint
+        const response = await fetch("https://bookingtour-psi.vercel.app/weekendDeals"); // Updated endpoint
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

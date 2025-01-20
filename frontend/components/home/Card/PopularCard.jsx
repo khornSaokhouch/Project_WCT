@@ -10,7 +10,7 @@ const Popular = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3002/tours"); // Use your mock API endpoint
+        const response = await fetch("https://bookingtour-psi.vercel.app/tours"); // Use your mock API endpoint
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

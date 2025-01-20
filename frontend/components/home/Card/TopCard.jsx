@@ -10,7 +10,7 @@ const TopCard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3002/destinations");
+        const response = await fetch("https://bookingtour-psi.vercel.app/destinations");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
