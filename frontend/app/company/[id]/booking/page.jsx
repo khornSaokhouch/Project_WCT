@@ -1,30 +1,42 @@
-// components/GuestTable.jsx
+"use client";
 
-'use client';
-
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faSearch } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useBookingStore } from "../../../../store/bookingStore";
 
 const GuestTable = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const guests = [
-    { name: 'James Benny', package: 'Trip of Cambodia', roomType: 'Classic Room', date: 'Oct 24th, 2020', time: '08:29 AM', status: 'Pending', members: 3 },
-    { name: 'William Chynto', package: 'Trip of Cambodia', roomType: 'Classic Room', date: 'Oct 24th, 2020', time: '08:29 AM', status: 'Reject', members: 4 },
-  ];
+  const { id } = useParams(); // Company ID (if needed)
+  const { bookings, loading, error, fetchBookings } = useBookingStore(); // Zustand store
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredGuests = guests.filter(guest =>
-    guest.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Fetch bookings on component load
+  useEffect(() => {
+    fetchBookings();
+  }, [fetchBookings]);
+
+  // Filter bookings by search term
+  const filteredBookings = bookings.filter(
+    (booking) =>
+      booking.name && booking.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleEdit = (guest) => {
-    console.log('Editing guest:', guest);
+  const handleEdit = (booking) => {
+    console.log("Editing booking:", booking);
   };
 
-  const handleDelete = (guest) => {
-    console.log('Deleting guest:', guest);
+  const handleDelete = (booking) => {
+    console.log("Deleting booking:", booking);
   };
+
+  if (loading) {
+    return <p>Loading bookings...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div className="overflow-x-auto">
@@ -56,28 +68,37 @@ const GuestTable = () => {
           </tr>
         </thead>
         <tbody className="text-gray-600 text-sm font-light">
-          {filteredGuests.map((guest, index) => (
-            <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
-              <td className="py-3 px-6 font-bold text-left">{guest.name}</td>
-              <td className="py-3 px-6 text-left">{guest.package}</td>
-              <td className="py-3 px-6 text-left">{guest.members}</td>
-              <td className="py-3 px-6 text-left">{guest.date}</td>
-              <td className="py-3 px-6 text-left">{guest.time}</td>
+          {filteredBookings.map((booking, index) => (
+            <tr
+              key={index}
+              className="border-b border-gray-200 hover:bg-gray-100"
+            >
+              <td className="py-3 px-6 font-bold text-left">{booking.name}</td>
+              <td className="py-3 px-6 text-left">{booking.package}</td>
+              <td className="py-3 px-6 text-left">{booking.members}</td>
+              <td className="py-3 px-6 text-left">{booking.date}</td>
+              <td className="py-3 px-6 text-left">{booking.time}</td>
               <td className="py-3 px-6 text-left">
-                <span className={`px-3 py-2 rounded-sm text-xs font-semibold ${guest.status === 'Pending' ? 'bg-yellow-500 text-white' : 'bg-red-500 text-white'}`}>
-                  {guest.status}
+                <span
+                  className={`px-3 py-2 rounded-sm text-xs font-semibold ${
+                    booking.status === "Pending"
+                      ? "bg-yellow-500 text-white"
+                      : "bg-red-500 text-white"
+                  }`}
+                >
+                  {booking.status}
                 </span>
               </td>
               <td className="py-3 px-6 text-left">
-                <button 
+                <button
                   className="text-blue-500 hover:text-blue-700"
-                  onClick={() => handleEdit(guest)}
+                  onClick={() => handleEdit(booking)}
                 >
                   <FontAwesomeIcon icon={faEdit} /> Edit
                 </button>
-                <button 
+                <button
                   className="ml-2 text-red-500 hover:text-red-700"
-                  onClick={() => handleDelete(guest)}
+                  onClick={() => handleDelete(booking)}
                 >
                   <FontAwesomeIcon icon={faTrash} /> Delete
                 </button>

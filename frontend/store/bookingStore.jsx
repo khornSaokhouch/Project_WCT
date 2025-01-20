@@ -1,30 +1,39 @@
 import { create } from "zustand";
 
+import axios from "axios";
 const API_URL = "http://localhost:3500/api/bookings";
 
 export const useBookingStore = create((set) => ({
-  bookings: [], // Array to store all bookings
-  selectedBooking: null, // Currently selected booking
-  loading: false, // Loading state
-  error: null, // Error state
-  totalBookings: 0, // Add total bookings
-  totalPendingBookings: 0, // Add total pending bookings
+  bookings: [],
+  selectedBooking: null,
+  totalBookings: 0,
+  totalPendingBookings: 0,
+  loading: false,
+  error: null,
 
-  // Fetch booking statistics
-  fetchBookingStatistics: async () => {
+  // Fetch booking statistics by company ID
+  fetchBookingStatisticsByCompanyId: async (id) => {
     set({ loading: true, error: null });
+
     try {
-      const response = await fetch(`${API_URL}/statistics/totals`); // Replace with your API endpoint
-      const data = await response.json();
+      const response = await axios.get(`${API_URL}/statistics/totals/${id}`);
+      const { totalBookings, totalPendingBookings } = response.data.statistics;
+
       set({
-        totalBookings: data.totalBookings,
-        totalPendingBookings: data.totalPendingBookings,
+        totalBookings,
+        totalPendingBookings,
         loading: false,
       });
     } catch (error) {
-      set({ error: error.message, loading: false });
+      set({
+        error:
+          error.response?.data?.message ||
+          "Failed to fetch booking statistics.",
+        loading: false,
+      });
     }
   },
+  // Clear the store when needed
 
   // Fetch all bookings
   fetchBookings: async () => {

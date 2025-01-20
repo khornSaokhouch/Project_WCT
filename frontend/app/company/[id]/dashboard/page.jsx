@@ -12,21 +12,33 @@ const DashboardPage = () => {
   const { user, image, isLoading, error, fetchImage, fetchCompanyById } =
     useAuthStore(); // Destructure Zustand store
   const {
+    company,
     totalBookings,
     totalPendingBookings,
     loading,
-    fetchBookingStatistics,
-  } = useBookingStore();
+
+    fetchBookingStatisticsByCompanyId,
+  } = useBookingStore(); // Destructure booking store
 
   useEffect(() => {
-    fetchBookingStatistics();
-  }, [fetchBookingStatistics]); // Destructure Zustand store
+    // Fetch booking statistics by company ID
+    if (id) {
+      fetchBookingStatisticsByCompanyId(id);
+    }
+  }, [id, fetchBookingStatisticsByCompanyId]);
+
+  // Fetch company details when the component mounts or when the ID changes
+  useEffect(() => {
+    fetchCompanyById(id).catch((err) =>
+      console.error("Error in fetchCompanyById:", err)
+    );
+  }, [id, fetchCompanyById]);
 
   // Mock counts data (replace with actual data from your API)
   const counts = {
-    users: 120,
-    subAdmins: 15,
-    bookings: 250,
+    users: 0,
+    subAdmins: 0,
+    bookings: 0,
   };
 
   // Fetch company details when the component mounts or when the ID changes
@@ -67,12 +79,12 @@ const DashboardPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
         {[
           {
-            count: totalPendingBookings,
+            count: totalBookings,
             label: "Total Booking",
             color: "text-blue-600",
           },
           {
-            count: totalBookings,
+            count: totalPendingBookings,
             label: " Total pandding",
             color: "text-green-600",
           },
