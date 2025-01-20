@@ -5,7 +5,6 @@ const API_URL = "http://localhost:3500/api/bookings";
 
 export const useBookingStore = create((set) => ({
   bookings: [],
-  selectedBooking: null,
   totalBookings: 0,
   totalPendingBookings: 0,
   loading: false,
@@ -48,17 +47,20 @@ export const useBookingStore = create((set) => ({
   },
 
   // Fetch a single booking by ID
-  fetchBookingById: async (id) => {
+
+  fetchBookingsBySubadmin: async (subadminId) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(`${API_URL}/${id}`); // Replace with your API endpoint
+      const response = await fetch(`${API_URL}/subadmin/${subadminId}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch bookings by subadmin.");
+      }
       const data = await response.json();
-      set({ selectedBooking: data.booking, loading: false });
+      set({ bookings: data.bookings, loading: false });
     } catch (error) {
       set({ error: error.message, loading: false });
     }
   },
-
   // Create a new booking
   createBooking: async (bookingData) => {
     set({ loading: true, error: null });
