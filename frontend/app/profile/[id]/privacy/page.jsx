@@ -1,5 +1,5 @@
-import ProfileUser from "../../components/Profile"
-import Footer from "../../components/Footer"
+import ProfileUser from "@/components/Profile"
+import Footer from "@/components/Footer"
 import PrivacyPolicy from "./components/PrivacyPolicy"
 
 

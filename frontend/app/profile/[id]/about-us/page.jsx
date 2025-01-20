@@ -1,6 +1,6 @@
 
-import ProfileUser from "../../components/Profile"
-import Footer from "../../components/Footer"
+import ProfileUser from "@/components/Profile"
+import Footer from "@/components/Footer"
 import TeamSection from "./components/TeamSection"
 import MissionVisionSection from "./components/MissionVisionSection"
 

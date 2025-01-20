@@ -1,4 +1,3 @@
-// ProfilePage Component
 "use client";
 
 import { useState, useEffect } from "react";
@@ -21,23 +20,36 @@ const ProfilePage = () => {
     isLoading,
     error,
     fetchImage,
-    fetchCompanyById,
     fetchUserById,
   } = useAuthStore();
 
   useEffect(() => {
-    fetchUserById(id).catch((err) =>
-      console.error("Error in fetchCompanyById:", err)
-    );
+    if (id) {
+      fetchUserById(id).catch((err) => {
+        console.error("Error fetching user:", err);
+      });
+    }
   }, [id, fetchUserById]);
 
   useEffect(() => {
     if (user?._id) {
-      fetchImage(user._id).catch((err) =>
-        console.error("Error in fetchImage:", err)
-      );
+      fetchImage(user._id).catch((err) => {
+        console.error("Error fetching image:", err);
+      });
     }
   }, [user, fetchImage]);
+
+  if (isLoading) {
+    return <div className="text-center py-5">Loading profile...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center py-5 text-red-500">Error: {error}</div>;
+  }
+
+  if (!user) {
+    return <div className="text-center py-5">No user data found.</div>;
+  }
 
   return (
     <div>
