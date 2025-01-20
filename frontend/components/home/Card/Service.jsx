@@ -11,7 +11,7 @@ const Services = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://bookingtour-psi.vercel.app/services"); // Replace with your JSON Server endpoint
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/services`); // Replace with your JSON Server endpoint
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
