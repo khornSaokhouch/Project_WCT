@@ -220,15 +220,45 @@ export const deleteTour = async (req, res) => {
   }
 };
 
-export const getUpcomingTours = async (req, res) => {
+// Fetch upcoming tours for a specific subadmin by their ID
+export const getUpcomingToursBySubadminId = async (req, res) => {
   try {
-    const today = new Date();
-    const upcomingTours = await Tour.find({ startDate: { $gte: today } })
-      .populate("category location company")
-      .sort({ startDate: 1 }); // Sort by the earliest start date
-    res.status(200).json(upcomingTours);
+    const { id } = req.params; // Extract subadminId (company ID) from URL parameters
+    const currentDate = new Date(); // Get the current date and time
+
+    // Check if the company (subadmin) exists
+    const company = await User.findById(id);
+    if (!company) {
+      return res.status(404).json({ message: "Company (subadmin) not found." });
+    }
+
+    // Find tours where the startDate is greater than the current date and the company matches the subadminId
+    const upcomingTours = await Tour.find({
+      company: id,
+      startDate: { $gt: currentDate },
+    }).populate("category location company");
+
+    // If no upcoming tours are found, return an empty array
+    if (!upcomingTours.length) {
+      return res.status(200).json({
+        message: "No upcoming tours found for this subadmin.",
+        data: [],
+        count: 0, // Optional: Include count for consistency
+      });
+    }
+
+    // Return the upcoming tours and their count
+    res.status(200).json({
+      message: "Upcoming tours fetched successfully",
+      data: upcomingTours,
+      upcommingTour: upcomingTours.length, // Optional: Include count for consistency
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    // Handle errors
+    res.status(500).json({
+      error: "Failed to fetch upcoming tours",
+      details: error.message,
+    });
   }
 };
 
@@ -248,5 +278,24 @@ export const getToursByDateRange = async (req, res) => {
     res.status(200).json(tours);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const getTotalTours = async (req, res) => {
+  try {
+    // Count all tours in the database
+    const totalTours = await Tour.countDocuments();
+
+    // Return the total count
+    res.status(200).json({
+      message: "Total tours fetched successfully",
+      totalTours,
+    });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({
+      error: "Failed to fetch total tours",
+      details: error.message,
+    });
   }
 };

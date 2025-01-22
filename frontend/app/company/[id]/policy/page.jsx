@@ -1,4 +1,5 @@
-"use client";
+"use client"; // Ensure this is at the top for client-side rendering
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import usePolicyStore from "@/store/policyStore";
@@ -12,6 +13,8 @@ const InviteCard = () => {
   const [selectedPolicyId, setSelectedPolicyId] = useState(null); // State to track selected policy ID
   const [isActiveFilter, setIsActiveFilter] = useState(null); // State for isActive filter
   const [editingPolicy, setEditingPolicy] = useState(null); // State to track policy being edited
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); // State for delete confirmation form
+  const [policyToDelete, setPolicyToDelete] = useState(null); // Track which policy is being deleted
 
   // Zustand store functions and state
   const {
@@ -80,9 +83,23 @@ const InviteCard = () => {
 
   // Handle "Delete" button click
   const handleDeletePolicy = async (policyId) => {
-    if (window.confirm("Are you sure you want to delete this policy?")) {
-      await deletePolicy(id, policyId);
+    setPolicyToDelete(policyId); // Set the policy to delete
+    setShowDeleteConfirmation(true); // Show the confirmation form
+  };
+
+  // Handle delete confirmation
+  const handleDeleteConfirm = async () => {
+    if (policyToDelete) {
+      await deletePolicy(id, policyToDelete);
+      setShowDeleteConfirmation(false); // Hide the confirmation form
+      setPolicyToDelete(null); // Reset the policy to delete
     }
+  };
+
+  // Handle delete cancellation
+  const handleDeleteCancel = () => {
+    setShowDeleteConfirmation(false); // Hide the confirmation form
+    setPolicyToDelete(null); // Reset the policy to delete
   };
 
   // Handle isActive filter change
@@ -242,6 +259,40 @@ const InviteCard = () => {
           </div>
         </div>
       )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirmation && (
+        <DeleteConfirmationModal
+          onConfirm={handleDeleteConfirm}
+          onCancel={handleDeleteCancel}
+        />
+      )}
+    </div>
+  );
+};
+
+// Delete Confirmation Modal Component
+const DeleteConfirmationModal = ({ onConfirm, onCancel }) => {
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg p-6 w-full max-w-md">
+        <h2 className="text-xl font-bold mb-4">Delete Policy</h2>
+        <p className="mb-4">Are you sure you want to delete this policy?</p>
+        <div className="flex gap-4">
+          <button
+            onClick={onConfirm}
+            className="w-full bg-red-500 text-white py-2 rounded"
+          >
+            Delete
+          </button>
+          <button
+            onClick={onCancel}
+            className="w-full bg-gray-500 text-white py-2 rounded"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

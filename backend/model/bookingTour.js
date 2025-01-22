@@ -11,14 +11,14 @@ const BookingSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  price: {
-    type: Number,
-    required: true,
-  },
-  packageName: {
-    type: String,
-    required: true,
-  },
+  // price: {
+  //   type: Number,
+  //   required: true,
+  // },
+  // packageName: {
+  //   type: String,
+  //   required: true,
+  // },
   members: {
     type: Number,
     required: true,

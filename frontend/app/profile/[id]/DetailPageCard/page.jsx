@@ -13,51 +13,53 @@ const DetailPageCard = () => {
   const [quantity, setQuantity] = useState(0);
 
   // Fetch destination data based on `id`
-  useEffect(() => {
-    if (id) {
-      const fetchDestination = async () => {
-        try {
-          const response = await fetch(`http://localhost:3002/destinations/${id}`);
-          if (!response.ok) {
-            throw new Error("Failed to fetch destination data");
-          }
-          const data = await response.json();
-          setDestination(data);
-          setLoading(false);
-        } catch (error) {
-          setError(error.message);
-          setLoading(false);
-        }
-      };
+  // useEffect(() => {
+  //   if (id) {
+  //     const fetchDestination = async () => {
+  //       try {
+  //         const response = await fetch(
+  //           `http://localhost:3002/destinations/${id}`
+  //         );
+  //         if (!response.ok) {
+  //           throw new Error("Failed to fetch destination data");
+  //         }
+  //         const data = await response.json();
+  //         setDestination(data);
+  //         setLoading(false);
+  //       } catch (error) {
+  //         setError(error.message);
+  //         setLoading(false);
+  //       }
+  //     };
 
-      fetchDestination();
-    }
-  }, [id]);
+  //     fetchDestination();
+  //   }
+  // }, [id]);
 
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
+  // const increaseQuantity = () => {
+  //   setQuantity(quantity + 1);
+  // };
 
-  const decreaseQuantity = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-    }
-  };
+  // const decreaseQuantity = () => {
+  //   if (quantity > 0) {
+  //     setQuantity(quantity - 1);
+  //   }
+  // };
 
-  if (loading) {
-    return <div className="text-center py-5">Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div className="text-center py-5">Loading...</div>;
+  // }
 
-  if (error) {
-    return <div className="text-center py-5 text-red-500">Error: {error}</div>;
-  }
+  // if (error) {
+  //   return <div className="text-center py-5 text-red-500">Error: {error}</div>;
+  // }
 
-  if (!destination) {
-    return <div className="text-center py-5">Destination not found.</div>;
-  }
+  // if (!destination) {
+  //   return <div className="text-center py-5">Destination not found.</div>;
+  // }
 
-  const pricePerPackage = 250;
-  const totalPayment = quantity * pricePerPackage;
+  // const pricePerPackage = 250;
+  // const totalPayment = quantity * pricePerPackage;
 
   return (
     <div>
@@ -66,8 +68,9 @@ const DetailPageCard = () => {
         {/* Header Section */}
         <section>
           <h1 className="text-4xl font-bold mb-2">{destination.destination}</h1>
-          <p className="text-gray-600 mb-4 text-yellow-600">
-            📍 {destination.destination} • ⭐⭐⭐⭐⭐ ({destination.reviews} reviews)
+          <p className=" mb-4 text-yellow-600">
+            📍 {destination.destination} • ⭐⭐⭐⭐⭐ ({destination.reviews}{" "}
+            reviews)
           </p>
         </section>
 
@@ -90,7 +93,9 @@ const DetailPageCard = () => {
               className="rounded-lg h-64 w-full object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
-              <span className="text-white text-xl font-bold">+2 More Photos</span>
+              <span className="text-white text-xl font-bold">
+                +2 More Photos
+              </span>
             </div>
           </div>
         </section>
@@ -107,7 +112,9 @@ const DetailPageCard = () => {
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Plan Package Section */}
           <div className="col-span-1">
-            <h2 className="text-xl text-blue-600 font-semibold mb-2">Plan Package</h2>
+            <h2 className="text-xl text-blue-600 font-semibold mb-2">
+              Plan Package
+            </h2>
             <div>
               {Array(4)
                 .fill(0)
@@ -127,7 +134,9 @@ const DetailPageCard = () => {
           {/* Booking Section */}
           <div className="col-span-1 bg-white shadow-lg rounded-lg p-6">
             <div className="mt-4">
-              <h3 className="text-lg font-bold mb-5">Most popular facilities that we provide</h3>
+              <h3 className="text-lg font-bold mb-5">
+                Most popular facilities that we provide
+              </h3>
               <div className="items-center space-x-6 text-gray-700">
                 {/* Private parking */}
                 <div className="flex mx-5 items-center space-x-2 mb-2">
@@ -162,7 +171,9 @@ const DetailPageCard = () => {
 
                 {/* Quantity Selector */}
                 <div className="mt-4 flex items-center bg-gray-200 rounded-lg p-2">
-                  <label className="text-gray-700 mr-4 font-medium">Quantity</label>
+                  <label className="text-gray-700 mr-4 font-medium">
+                    Quantity
+                  </label>
                   <button
                     className="w-8 h-8 bg-gray-300 text-gray-700 rounded-full flex justify-center items-center hover:bg-gray-400"
                     onClick={decreaseQuantity}

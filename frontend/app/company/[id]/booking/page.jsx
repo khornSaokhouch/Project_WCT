@@ -20,6 +20,10 @@ const GuestTable = () => {
     }
   }, [id, fetchBookingsBySubadmin]);
 
+  if (bookings.length === 0 && !loading) {
+    return <p className="p-6">No policies found for this subadmin.</p>;
+  }
+
   // Fetch bookings when the component mounts or the ID changes
 
   // Filter bookings based on the search term
@@ -55,6 +59,9 @@ const GuestTable = () => {
               <th className="py-3 px-6 text-left">Members</th>
               <th className="py-3 px-6 text-left">Date</th>
               <th className="py-3 px-6 text-left">Time</th>
+              <th className="py-3 px-6 text-left">Price Tour</th>
+              <th className="py-3 px-6 text-left">StartDate</th>
+              <th className="py-3 px-6 text-left">EndDate</th>
               <th className="py-3 px-6 text-left">Status</th>
               <th className="py-3 px-6 text-left">Actions</th>
             </tr>
@@ -80,6 +87,15 @@ const GuestTable = () => {
                     {booking.time || "N/A"}
                   </td>
                   <td className="py-3 px-6 text-left">
+                    {booking.tour?.price}$
+                  </td>
+                  <td className="py-3 px-6 text-left">
+                    {booking.tour?.startDate.split("T")[0]}
+                  </td>
+                  <td className="py-3 px-6 text-left">
+                    {booking.tour?.endDate.split("T")[0]}
+                  </td>
+                  <td className="py-3 px-6 text-left">
                     <span
                       className={`px-3 py-2 rounded-sm text-xs font-semibold ${
                         booking.status === "Pending"
@@ -94,7 +110,6 @@ const GuestTable = () => {
                     <button className="text-blue-500 hover:text-blue-700 mr-2">
                       <FontAwesomeIcon icon={faEdit} /> Edit
                     </button>
-                    
                   </td>
                 </tr>
               ))
