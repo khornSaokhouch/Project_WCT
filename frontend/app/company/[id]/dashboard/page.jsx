@@ -6,9 +6,12 @@ import { useEffect } from "react";
 import { Users } from "lucide-react"; // Import the Users icon
 import { Card } from "@/components/ui/card"; // Import the Card component
 import { useBookingStore } from "../../../../store/bookingStore";
+import { useTourStore } from "../../../../store/package";
 
 const DashboardPage = () => {
   const { id } = useParams(); // Get the company ID from the URL
+  const { fetchUpcomingToursBySubadminId, upcomingToursCount } =
+    useTourStore();
   const { user, image, isLoading, error, fetchImage, fetchCompanyById } =
     useAuthStore(); // Destructure Zustand store
   const {
@@ -26,6 +29,10 @@ const DashboardPage = () => {
       fetchBookingStatisticsByCompanyId(id);
     }
   }, [id, fetchBookingStatisticsByCompanyId]);
+
+  useEffect(() => {
+    fetchUpcomingToursBySubadminId(id);
+  }, [id, fetchUpcomingToursBySubadminId]);
 
   // Fetch company details when the component mounts or when the ID changes
   useEffect(() => {
@@ -89,7 +96,7 @@ const DashboardPage = () => {
             color: "text-green-600",
           },
           {
-            count: counts.bookings,
+            count: upcomingToursCount,  
             label: "Total Upcomming",
             color: "text-purple-600",
           },

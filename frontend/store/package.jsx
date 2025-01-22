@@ -7,6 +7,8 @@ export const useTourStore = create((set) => ({
   tours: [],
   currentTour: null,
   upcomingTours: [],
+  upcomingToursCount: 0,
+  totalTours: 0,
   dateRangeTours: [],
   loading: false,
   error: null,
@@ -89,12 +91,17 @@ export const useTourStore = create((set) => ({
     }
   },
 
-  // Fetch upcoming tours
-  fetchUpcomingTours: async () => {
+  // Fetch upcoming tours for a specific subadmin
+  fetchUpcomingToursBySubadminId: async (id) => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.get(`${API_URL}/upcoming`);
-      set({ upcomingTours: response.data, loading: false });
+      const response = await axios.get(`${API_URL}/upcoming/${id}`);
+      set({
+        upcomingTours: response.data.data,
+        upcomingToursCount:
+          response.data.upcomingTourCount || response.data.data.length, // Update the count
+        loading: false,
+      });
     } catch (error) {
       set({
         error: error.response?.data.message || error.message,
@@ -120,11 +127,11 @@ export const useTourStore = create((set) => ({
   },
 
   // Create a new tour
-  createTour: async (subadminId, tourData) => {
+  createTour: async (id, tourData) => {
     set({ loading: true, error: null });
     try {
       const response = await axios.post(
-        `${API_URL}/${subadminId}/add`,
+        `${API_URL}/${id}/add`,
         tourData
       );
       set((state) => ({
@@ -237,6 +244,19 @@ export const useTourStore = create((set) => ({
       }
     } catch (error) {
       set({ error: error.message, loading: false });
+    }
+  },
+
+  fetchTotalTours: async () => {
+    set({ loading: true, error: null });
+    try {
+      const response = await axios.get(`${API_URL}/total`);
+      set({ totalTours: response.data.totalTours, loading: false });
+    } catch (error) {
+      set({
+        error: error.response?.data.message || error.message,
+        loading: false,
+      });
     }
   },
 }));

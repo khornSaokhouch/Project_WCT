@@ -308,16 +308,15 @@ export const handleGoogle = async (req, res) => {
       }
 
       // Redirect to the profile page with the user's ID
-      return res.redirect(`${process.env.CLIENT_URL}/profile/${newUser._id}`);
+      return res.redirect(`${process.env.CLIENT_URL}?id=${newUser._id}`);
     } else {
       // If the user exists, update the profile picture and Google ID
       user.image = userInfo.picture;
       user.googleId = userInfo.sub;
-      user.role = userInfo.sub === allowedIDadmin ? "admin" : user.role; // Update role if admin
       await user.save();
 
       if (user.role === "user") {
-        return res.redirect(`${process.env.CLIENT_URL}/profile/${user._id}`);
+        return res.redirect(`${process.env.CLIENT_URL}?id=${user._id}`);
       } else if (user.role === "subadmin") {
         return res.redirect(
           `${process.env.CLIENT_URL}/company/${user._id}/dashboard`

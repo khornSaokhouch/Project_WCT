@@ -16,16 +16,22 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Users, Filter, Download, MoreHorizontal } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useAdminStore } from "@/store/adminStore";
+import { useTourStore } from "@/store/package";
 
 const Dashboard = () => {
   const { id } = useParams();
   const { fetchAdminUsers, users, counts, loading, error } = useAdminStore();
+  const { totalTours, fetchTotalTours } = useTourStore();
 
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     if (id) fetchAdminUsers(id);
   }, [id, fetchAdminUsers]);
+
+  useEffect(() => {
+    fetchTotalTours();
+  }, [fetchTotalTours]);
 
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -43,8 +49,8 @@ const Dashboard = () => {
             color: "text-green-600",
           },
           {
-            count: counts.bookings,
-            label: "Tour Bookings",
+            count: totalTours,
+            label: "Total Tour",
             color: "text-purple-600",
           },
         ].map((stat, index) => (

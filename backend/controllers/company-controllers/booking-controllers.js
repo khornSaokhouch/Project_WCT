@@ -6,8 +6,7 @@ import { User } from "../../model/user.js";
 export const createBooking = async (req, res) => {
   try {
     const { userId } = req.params; // Extract user ID from URL
-    const { tour, company, price, packageName, members, dateOrder, time } =
-      req.body; // Extract fields from request body
+    const { tour, company, members, dateOrder, time } = req.body; // Extract fields from request body
 
     // Validate input
     if (!tour || !userId || !company) {
@@ -35,8 +34,6 @@ export const createBooking = async (req, res) => {
     const booking = new Booking({
       tour,
       user: userId,
-      price,
-      packageName,
       approvedBy: subAdmin._id, // Use sub-admin ID in the booking
       members,
       dateOrder,
@@ -50,8 +47,6 @@ export const createBooking = async (req, res) => {
       id: booking._id, // Add the `id` field
       tour: booking.tour,
       user: booking.user,
-      price: booking.price,
-      packageName: booking.packageName,
       approvedBy: booking.approvedBy,
       members: booking.members,
       dateOrder: booking.dateOrder,
@@ -104,8 +99,8 @@ export const getBookingsBySubadmin = async (req, res) => {
 
     // Fetch all bookings approved by the subadmin
     const bookings = await Booking.find({ approvedBy: subadminId })
-      .populate("tour", "name price") // Populate tour details
-      .populate("user", "name email"); // Populate user details
+      .populate("tour", "name price startDate endDate duration") // Populate tour details
+      .populate("user", "name email "); // Populate user details
 
     if (!bookings || bookings.length === 0) {
       return res

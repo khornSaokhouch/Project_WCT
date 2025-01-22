@@ -173,6 +173,7 @@ export const updatePolicy = async (req, res) => {
 };
 
 // Delete (soft delete) a policy by ID
+// Delete a policy by ID
 export const deletePolicy = async (req, res) => {
   const { subadminId, id } = req.params; // Sub-admin ID and policy ID from the URL
 
@@ -186,8 +187,8 @@ export const deletePolicy = async (req, res) => {
       });
     }
 
-    // Find the policy
-    const policy = await Policy.findOne({ _id: id, createdBy: subadminId });
+    // Find and delete the policy
+    const policy = await Policy.findOneAndDelete({ _id: id, createdBy: subadminId });
     if (!policy) {
       return res.status(404).json({
         success: false,
@@ -195,13 +196,10 @@ export const deletePolicy = async (req, res) => {
       });
     }
 
-    // Soft delete by setting isActive to false
-    policy.isActive = false;
-    await policy.save();
-
     res.status(200).json({
       success: true,
-      message: "Policy deleted (soft delete) successfully.",
+      message: "Policy deleted successfully.",
+      policy,
     });
   } catch (error) {
     console.error("Error deleting policy:", error.message);
@@ -212,3 +210,4 @@ export const deletePolicy = async (req, res) => {
     });
   }
 };
+
