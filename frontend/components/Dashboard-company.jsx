@@ -14,7 +14,6 @@ const DashboardCompany = ({ children, id }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
 
-
 useEffect(() => {
   console.log("ID passed to DashboardCompany:", id);
   if (id) {
