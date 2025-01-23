@@ -315,10 +315,18 @@ export const getAllTours = async (req, res) => {
       });
     }
 
+    // Replace null fields with default values
+    const sanitizedTours = tours.map((tour) => ({
+      ...tour._doc,
+      category: tour.category || { name: "No Category" },
+      location: tour.location || { name: "No Location" },
+      company: tour.company || { name: "No Company" },
+    }));
+
     // Return the fetched tours
     res.status(200).json({
       message: "Tours fetched successfully",
-      data: tours,
+      data: sanitizedTours,
     });
   } catch (error) {
     res.status(500).json({

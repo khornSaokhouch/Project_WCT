@@ -257,13 +257,15 @@ export const useTourStore = create((set) => ({
     }
   },
 
+  // Fetch all tours
   fetchAllTours: async () => {
-    set({ loading: true, error: null }); // Set loading to true and clear errors
+    set({ loading: true, error: null });
     try {
       const response = await axios.get(`${API_URL}`);
-      set({ tours: response.data.data, loading: false }); // Update tours and set loading to false
+      console.log("API Response:", response.data); // Log the response for debugging
+      set({ tours: response.data.data, loading: false }); // Set tours with the "data" field
     } catch (error) {
-      set({ error: error.message, loading: false }); // Set error and set loading to false
+      set({ error: error.message, loading: false });
     }
   },
 }));
