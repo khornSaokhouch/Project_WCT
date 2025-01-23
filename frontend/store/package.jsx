@@ -130,10 +130,7 @@ export const useTourStore = create((set) => ({
   createTour: async (id, tourData) => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.post(
-        `${API_URL}/${id}/add`,
-        tourData
-      );
+      const response = await axios.post(`${API_URL}/${id}/add`, tourData);
       set((state) => ({
         tours: [...state.tours, response.data.tour],
         successMessage: "Tour created successfully!",
@@ -257,6 +254,16 @@ export const useTourStore = create((set) => ({
         error: error.response?.data.message || error.message,
         loading: false,
       });
+    }
+  },
+
+  fetchAllTours: async () => {
+    set({ loading: true, error: null }); // Set loading to true and clear errors
+    try {
+      const response = await axios.get(`${API_URL}`);
+      set({ tours: response.data.data, loading: false }); // Update tours and set loading to false
+    } catch (error) {
+      set({ error: error.message, loading: false }); // Set error and set loading to false
     }
   },
 }));

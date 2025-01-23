@@ -16,7 +16,6 @@ import fs from "fs";
 import axios from "axios";
 
 // Signup function
-// Signup function
 
 export const signup = async (req, res) => {
   const {

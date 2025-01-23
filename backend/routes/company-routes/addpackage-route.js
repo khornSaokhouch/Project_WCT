@@ -6,6 +6,7 @@ import {
   updateTour,
   deleteTour,
   // getUpcomingTours,
+  getAllTours,
   getTotalTours,
   getUpcomingToursBySubadminId,
   getToursByDateRange,
@@ -35,5 +36,6 @@ router.get("/total", getTotalTours);
 
 // Routes for all users
 router.get("/:id", getTourById);
+router.get("/", getAllTours); // Fetch all tours
 
 export default router;

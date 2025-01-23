@@ -299,3 +299,31 @@ export const getTotalTours = async (req, res) => {
     });
   }
 };
+
+
+// Get all tours
+export const getAllTours = async (req, res) => {
+  try {
+    // Fetch all tours from the database
+    const tours = await Tour.find().populate("category location company");
+
+    // If no tours found, return a message
+    if (!tours.length) {
+      return res.status(404).json({
+        message: "No tours found.",
+        data: [],
+      });
+    }
+
+    // Return the fetched tours
+    res.status(200).json({
+      message: "Tours fetched successfully",
+      data: tours,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error fetching tours",
+      error: error.message,
+    });
+  }
+};

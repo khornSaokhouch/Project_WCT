@@ -92,7 +92,7 @@ const FeatureNewsCard = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                 <p className="text-gray-700 mb-4">{item.description}</p>
-                <a href="#" className="inline-block text-blue-500 font-medium hover:underline flex items-center">
+                <a href="#" className=" text-blue-500 font-medium hover:underline flex items-center">
                   See more
                   <FaArrowRight className="ml-2" /> {/* Arrow icon */}
                 </a>
