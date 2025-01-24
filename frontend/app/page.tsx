@@ -11,6 +11,16 @@ import { useAuthStore } from "../store/authStore";
 import { useParams } from "next/navigation";
 import { useTourStore } from "../store/package";
 
+interface Tour {
+  _id: string;
+  mainImage: string;
+  name: string;
+  rating?: number;
+  reviews?: number;
+  duration: number;
+  price: number;
+}
+
 export default function Home() {
   const { id } = useParams();
   const { user, isLoading, error, fetchImage, fetchUserById } = useAuthStore();
@@ -59,7 +69,7 @@ export default function Home() {
           {tours.length > 0 ? (
             tours
               .slice(0, 8) // Limit the number of tours to 3
-              .map((tour) => (
+              .map((tour: Tour) => (
                 <Link
                   key={tour._id}
                   href={`/destination/${tour._id}`}
