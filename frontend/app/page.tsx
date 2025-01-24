@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image"; // Import the Image component
 import Service from "../components/home/Card/Service";
 import { FaStar } from "react-icons/fa";
 import Footer from "../components/Footer";
@@ -65,9 +66,11 @@ export default function Home() {
                   className="w-72 bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 cursor-pointer"
                 >
                   <div>
-                    <img
+                    <Image
                       src={tour.mainImage}
                       alt={tour.name}
+                      width={288} // Set the width of the image
+                      height={240} // Set the height of the image
                       className="w-full h-60 object-cover"
                     />
                     <div className="p-4">
@@ -106,7 +109,7 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <Service/>
+      <Service />
       <Footer />
     </div>
   );
