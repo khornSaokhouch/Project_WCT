@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const API_URL = "http://localhost:3500/api/auth";
+const API_URL = "https://bookingtour-psi.vercel.app/api/auth";
 
 export const useAuthStore = create((set, get) => ({
   user: null,
