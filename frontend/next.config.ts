@@ -2,7 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['picsum.photos', 'example.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**', // Allow all hostnames
+      },
+    ],
   },
 };
 
