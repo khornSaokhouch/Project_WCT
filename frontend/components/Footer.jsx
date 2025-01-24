@@ -6,7 +6,7 @@ export default function Footer() {
         <footer 
             className="bg-gray-100 py-8" 
             style={{ 
-                backgroundImage: 'url("./Footer.png")', // Correcting image path formatting
+                backgroundImage: 'url("../Footer.png")', // Correcting image path formatting
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
             }}
@@ -21,10 +21,10 @@ export default function Footer() {
                         <div>
                             <h3 className="font-semibold text-lg pb-2">Company</h3>
                             <ul className="text-gray-600 space-y-2">
-                                <li><Link href="/about-us">About Us</Link></li>
-                                <li><Link href="/contact-us">Contact Us</Link></li>
-                                <li><Link href="/faq">FAQ</Link></li>
-                                <li><Link href="/privacy">Privacy Policy</Link></li>
+                                <li><Link href="./about-us">About Us</Link></li>
+                                <li><Link href="./contact-us">Contact Us</Link></li>
+                                <li><Link href="./faq">FAQ</Link></li>
+                                <li><Link href="./privacy">Privacy Policy</Link></li>
                             </ul>
                         </div>
                         <div>

@@ -38,21 +38,21 @@ const ServicesSection = () => {
       description:
         "Built Wicket longer admire do barton vanity itself do in it. Preferd to men it engrossed listening. Park gate sell they west hard for the.",
       imageUrl: "https://img.freepik.com/free-vector/cambodia-culture-flat-icons-set_98292-2663.jpg", // Replace with your image path
-      link: "/services/local-culture", // Replace with your link
+      link: "./services/local-culture", // Replace with your link
     },
     {
       title: "Local Events",
       description:
         "Barton vanity itself do in admire do barton vanity it. Preferd to men it engrossed listening. Park gate sell they west hard for the.",
       imageUrl: "https://www.shutterstock.com/image-vector/travel-cambodia-flat-icons-set-600nw-2300386719.jpg", // Replace with your image path
-      link: "/services/local-events", // Replace with your link
+      link: "./services/local-events", // Replace with your link
     },
     {
       title: "Historical Sites",
       description:
         "Admire do barton vanity itself do in it. Preferd to men it engrossed listening. Park gate sell they west hard for the.",
       imageUrl: "https://static.vecteezy.com/system/resources/previews/000/162/362/non_2x/free-cambodia-icons-vector.jpg", // Replace with your image path
-      link: "/services/historical-sites", // Replace with your link
+      link: "./services/historical-sites", // Replace with your link
     },
   ];
 

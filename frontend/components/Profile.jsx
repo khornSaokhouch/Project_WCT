@@ -110,13 +110,13 @@ const ProfileUser = ({ id }) => {
 
           {/* Navigation Links */}
           <nav className="hidden md:flex space-x-14 text-gray-700 font-medium text-lg ml-12">
-            <Link href="/" className="hover:text-blue-500">
+            <Link href={`/profile/${id}`} className="hover:text-blue-500">
               Home
             </Link>
-            <Link href="/services" className="hover:text-blue-500">
+            <Link href={`/profile/${id}/services`} className="hover:text-blue-500">
               Services
             </Link>
-            <Link href="/attractions" className="hover:text-blue-500">
+            <Link href={`/profile/${id}/attractions`} className="hover:text-blue-500">
               Attractions
             </Link>
           </nav>
@@ -124,14 +124,14 @@ const ProfileUser = ({ id }) => {
           {/* Right Section */}
           <div className="hidden md:flex items-center space-x-12 ml-auto text-lg mr-8">
             <Link
-              href="/favourites"
+              href={`/profile/${id}/favorites`}
               className="text-gray-700 hover:text-blue-500 flex items-center space-x-2"
             >
               <FontAwesomeIcon icon={faHeart} className="text-lg" />
               <span>Favorites</span>
             </Link>
             <Link
-              href="/become-a-supplier"
+              href={`/profile/${id}/become-a-supplier`}
               className="text-gray-700 hover:text-blue-500 flex items-center space-x-2"
             >
               <FontAwesomeIcon icon={faBriefcase} className="text-lg" />

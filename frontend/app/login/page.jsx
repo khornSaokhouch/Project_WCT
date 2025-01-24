@@ -54,7 +54,7 @@ const LoginPage = () => {
         }
         router.push(`/company/${id}/dashboard`);
       } else {
-        router.push(`/profile/${id}/about-us`);
+        router.push(`/profile/${id}`);
       }
     } catch (err) {
       setError(err.message || "Login failed. Please try again.");

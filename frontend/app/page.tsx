@@ -10,6 +10,8 @@ import { useAuthStore } from "../store/authStore";
 import { useParams } from "next/navigation";
 import { useTourStore } from "../store/package";
 
+
+
 export default function Home() {
   const { id } = useParams();
   const { user, isLoading, error, fetchImage, fetchUserById } = useAuthStore();

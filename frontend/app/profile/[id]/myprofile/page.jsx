@@ -85,7 +85,6 @@ const ProfilePage = () => {
 
   return (
     <div>
-        <ProfileUser />
         <div className="min-h-screen bg-gray-50 py-10">
       <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8">
         <div className="flex justify-between items-center mb-8">
@@ -212,7 +211,6 @@ const ProfilePage = () => {
         )}
       </div>
     </div>
-    <Footer />
     </div>
   );
 };
