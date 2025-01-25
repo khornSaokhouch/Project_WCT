@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL = "https://tour-booking-backend-etao.onrender.com/api/tours";
+const API_URL = "https://project-wct-jcen.onrender.com/api/tours";
 
 export const useTourStore = create((set) => ({
   tours: [],

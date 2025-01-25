@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const API_LOCATION_URL = "https://bookingtour-psi.vercel.app/api/locations";
+const API_LOCATION_URL = "https://project-wct-jcen.onrender.com/api/locations";
 
 export const useLocationStore = create((set, get) => ({
   locations: [],
