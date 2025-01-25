@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const API_CATEGORY_URL = "https://bookingtour-psi.vercel.app/api/categories";
+const API_CATEGORY_URL = "https://project-wct-jcen.onrender.com/api/categories";
 
 // Helper function to handle API requests
 const fetchApi = async (url, options = {}) => {
