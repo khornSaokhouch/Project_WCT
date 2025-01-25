@@ -21,7 +21,8 @@ const LoginPage = () => {
   // Handle Google OAuth2 login
   const handleGoogleLogin = () => {
     // Redirect to the backend endpoint that initiates Google OAuth2
-    window.location.href = "http://localhost:3500/api/auth/google";
+    window.location.href =
+      "https://project-wct-jcen.onrender.com/api/auth/google";
   };
 
   // Handle form submission
